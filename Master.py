@@ -3,7 +3,7 @@ import socket
 HEADER = 2048
 PORT = 5050
 FORMAT = 'utf-8'
-DISCONNECT_MESSAGE = "!DISCONNECT"
+DISCONNECT_MESSAGE = "EXIT"
 SERVER = socket.gethostbyname(socket.gethostname())
 ADDR = (SERVER, PORT)
 
@@ -25,6 +25,6 @@ connected = True
 while connected:
     var = input()
     send(var)
-    if var == DISCONNECT_MESSAGE:
+    if var.upper() == DISCONNECT_MESSAGE:
         connected = False
         continue
