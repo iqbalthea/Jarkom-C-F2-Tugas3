@@ -13,17 +13,23 @@ ADDR_2 = (SERVER, 5052)
 ADDR_3 = (SERVER, 5053)
 
 client_1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client_1.connect(ADDR_1)
-
 client_2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client_2.connect(ADDR_2)
-
 client_3 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client_3.connect(ADDR_3)
 
-print(f"CONNECTED TO SERVER {client_1.getsockname()}")
-print(f"CONNECTED TO SERVER {client_2.getsockname()}")
-print(f"CONNECTED TO SERVER {client_3.getsockname()}")
+
+def connect(client, addr):
+    client.connect(addr)
+    print(f"CONNECTED TO SERVER {addr}")
+
+
+def disconnect(client):
+    send(client, DISCONNECT_MESSAGE)
+
+
+def closeAll():
+    client_1.close()
+    client_2.close()
+    client_3.close()
 
 
 def send(client, msg):

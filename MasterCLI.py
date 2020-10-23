@@ -1,8 +1,11 @@
 from Master import *
 
-connect = True
+connected = True
+status_W1 = False
+status_W2 = False
+status_W3 = False
 
-while(connect):
+while connected:
     user_input = input(">>> ").split()
     command = user_input[0].upper()
     length = len(user_input)
@@ -14,21 +17,42 @@ while(connect):
     argument = user_input[1]
 
     if command == "EXIT" and argument == "ALL":
-        connect = False
+        connected = False
+        closeAll()
     elif command == "W1":
-        send(client_1, argument)
+        if argument.upper() != "CONNECT" and not status_W1:
+            print(f"Not connected to W1")
+        elif argument.upper() == "CONNECT" and not status_W1:
+            print(ADDR_1)
+            connect(client_1, ADDR_1)
+            status_W1 = True
+        elif argument.upper() == "DISCONNECT" and status_W1:
+            disconnect(client_1)
+            status_W1 = False
+        else:
+            send(client_1, argument)
     elif command == "W2":
-        send(client_2, argument)
+        if argument.upper() != "CONNECT" and not status_W2:
+            print(f"Not connected to W2")
+        elif argument.upper() == "CONNECT" and not status_W2:
+            connect(client_2, ADDR_2)
+            status_W2 = True
+        elif argument.upper() == "DISCONNECT" and status_W2:
+            disconnect(client_2)
+            status_W2 = False
+        else:
+            send(client_2, argument)
     elif command == "W3":
-        send(client_3, argument)
+        if argument.upper() != "CONNECT" and not status_W3:
+            print(f"Not connected to W3")
+        elif argument.upper() == "CONNECT" and not status_W3:
+            connect(client_3, ADDR_3)
+            status_W3 = True
+        elif argument.upper() == "DISCONNECT" and status_W3:
+            disconnect(client_3)
+            status_W3 = False
+        else:
+            send(client_3, argument)
     else:
         print("Invalid Command")
         continue
-
-
-send(client_1, DISCONNECT_MESSAGE)
-send(client_2, DISCONNECT_MESSAGE)
-send(client_3, DISCONNECT_MESSAGE)
-client_1.close()
-client_2.close()
-client_3.close()
