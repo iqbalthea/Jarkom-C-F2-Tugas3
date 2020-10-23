@@ -16,6 +16,11 @@ conn, addr = server.accept()
 print(f"{addr} CONNECTED TO SERVER")
 
 
+def sort_list(x):
+    lst = list(map(int, x.split(",")))
+    lst.sort()
+    return lst
+
 connected = True
 while connected:
     msg_length = conn.recv(HEADER).decode(FORMAT)
@@ -26,16 +31,18 @@ while connected:
             connected = False
             continue
 
-        lst = list(map(int, msg.split(",")))
-        lst.sort()
+        # lst = list(map(int, msg.split(",")))
+        # lst.sort()
 
-        if len(lst) < 1:
+        var = sort_list(msg)
+
+        if len(var) < 1:
             var = f"Error, no input"
             conn.send(var.encode(FORMAT))
         elif msg.upper() != DISCONNECT_MESSAGE:
-            print(f"[{addr}] {lst}")
-            var = f"Sorted list: {lst}"
-            conn.send(var.encode(FORMAT))
+            print(f"[{addr}] {var}")
+            var_print = f"Sorted list: {var}"
+            conn.send(var_print.encode(FORMAT))
         else:
             connected = False
 
