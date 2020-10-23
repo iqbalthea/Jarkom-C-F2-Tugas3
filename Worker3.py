@@ -16,15 +16,12 @@ print(f"SERVER IS LISTENING ON {server.getsockname()}")
 conn, addr = server.accept()
 print(f"{addr} CONNECTED TO SERVER")
 
-<<<<<<< HEAD
 
 def sort_list(x):
     lst = list(map(int, x.split(",")))
     lst.sort()
     return lst
 
-=======
->>>>>>> 387429388b4978b681f3d84ba38edd65d3f66eab
 connected = True
 while True:
     if not connected:
@@ -46,12 +43,13 @@ while True:
         # lst = list(map(int, msg.split(",")))
         # lst.sort()
 
-        var = sort_list(msg)
+        
 
-        if len(var) < 1:
-            var = f"Error, no input"
-            conn.send(var.encode(FORMAT))
+        if len(msg) < 1:
+            var_print = f"Error, no input"
+            conn.send(var_print.encode(FORMAT))
         elif msg.upper() != DISCONNECT_MESSAGE:
+            var = sort_list(msg)
             print(f"[{addr}] {var}")
             var_print = f"Sorted list: {var}"
             conn.send(var_print.encode(FORMAT))
