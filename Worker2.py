@@ -46,7 +46,10 @@ while True:
             continue
 
         print(f"[{addr}] {msg}")
-        var = find_factor(msg)
+        if msg.upper() == "CONNECT" :
+            var = f"WORKER 2 ALREADY CONNECTED"
+        else :
+            var = find_factor(msg)
         conn.send(var.encode(FORMAT))
 
 conn.close()

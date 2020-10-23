@@ -21,6 +21,11 @@ def connect(client, addr):
     client.connect(addr)
     print(f"CONNECTED TO SERVER {addr}")
 
+def reconnect(addr):
+    new_client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    new_client.connect(addr)
+    print(f"RECONNECTED TO SERVER {addr}")
+
 
 def disconnect(client):
     send(client, DISCONNECT_MESSAGE)
