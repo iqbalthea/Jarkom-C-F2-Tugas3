@@ -22,6 +22,7 @@ def sort_list(x):
     lst.sort()
     return lst
 
+
 connected = True
 while True:
     if not connected:
@@ -35,7 +36,7 @@ while True:
         msg = conn.recv(msg_length).decode(FORMAT)
         if msg.upper() == DISCONNECT_MESSAGE:
             print(f"{addr} DISCONNECT FROM SERVER")
-            response = f"WORKER 3 DISCONNECT FROM SERVER {ADDR}"
+            response = f"DISCONNECT FROM SERVER WORKER 3 {ADDR}"
             conn.send(response.encode(FORMAT))
             connected = False
             continue
@@ -43,15 +44,13 @@ while True:
         # lst = list(map(int, msg.split(",")))
         # lst.sort()
 
-        
-
         if len(msg) < 1:
             var_print = f"Error, no input"
             conn.send(var_print.encode(FORMAT))
         elif msg.upper() != DISCONNECT_MESSAGE:
             var = sort_list(msg)
             print(f"[{addr}] {var}")
-            var_print = f"Sorted list: {var}"
+            var_print = f"SORTED LIST: {var}"
             conn.send(var_print.encode(FORMAT))
         else:
             connected = False
