@@ -7,13 +7,13 @@ status_W3 = False
 
 while connected:
     user_input = input(">>> ").split()
-    command = user_input[0].upper()
     length = len(user_input)
 
     if length != 2:
         print("Invalid Command")
         continue
-
+    
+    command = user_input[0].upper()
     argument = user_input[1]
 
     if command == "EXIT" and argument == "ALL":
