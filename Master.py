@@ -1,14 +1,12 @@
 import socket
 
 HEADER = 2048
-# PORT = 5050
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "EXIT"
-# # SERVER = "18.212.111.142"
 SERVER = socket.gethostbyname(socket.gethostname())
-# ADDR = (SERVER, PORT)
 
-ADDR_1 = (SERVER, 5051)
+ADDR_1 = ("54.159.86.93", 5051)
+# ADDR_1 = (SERVER, 5051)
 ADDR_2 = (SERVER, 5052)
 ADDR_3 = (SERVER, 5053)
 
