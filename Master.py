@@ -53,7 +53,13 @@ def send(client, msg):
         print(f"JOB IS FAILED")
     else:
         print(f"JOB IS FINISHED")
+<<<<<<< HEAD
         print(f"OUTPUT : {recv_msg}")
+=======
+        print(f"[OUTPUT] = {recv_msg}")
+    
+    
+>>>>>>> 3749ce02ad912ccbe0b0e6d72d8049775805588c
 
 
 # connected = True

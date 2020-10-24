@@ -34,25 +34,20 @@ while True:
     if msg_length:
         msg_length = int(msg_length)
         msg = conn.recv(msg_length).decode(FORMAT)
-        if msg.upper() == DISCONNECT_MESSAGE:
+        print(f"[{addr}] {msg}")
+        if msg == DISCONNECT_MESSAGE:
             print(f"{addr} DISCONNECT FROM SERVER")
             response = f"DISCONNECT FROM SERVER WORKER 3 {ADDR}"
             conn.send(response.encode(FORMAT))
             connected = False
             continue
-
-        # lst = list(map(int, msg.split(",")))
-        # lst.sort()
-
-        if len(msg) < 1:
-            var_print = f"Error, no input"
-            conn.send(var_print.encode(FORMAT))
-        elif msg.upper() != DISCONNECT_MESSAGE:
-            var = sort_list(msg)
-            print(f"[{addr}] {var}")
-            var_print = f"SORTED LIST: {var}"
-            conn.send(var_print.encode(FORMAT))
+        elif msg.upper() == "CONNECT":
+            var = f"WORKER 2 ALREADY CONNECTED"
         else:
-            connected = False
+            try:
+                var = f"SORTED LIST: {sort_list(msg)}"
+            except:
+                var = f"ERROR"
+        conn.send(var.encode(FORMAT))
 
 conn.close()
