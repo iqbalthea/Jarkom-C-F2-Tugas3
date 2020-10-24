@@ -58,7 +58,7 @@ def send(client, msg):
         print(f"JOB IS FAILED")
     else :
         print(f"JOB IS FINISHED")
-        print(f"OUTPUT : {recv_msg}")
+        print(f"[OUTPUT] = {recv_msg}")
     
     
 
