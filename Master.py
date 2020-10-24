@@ -28,7 +28,15 @@ def reconnect(addr):
 
 
 def disconnect(client):
-    send(client, DISCONNECT_MESSAGE)
+    msg = DISCONNECT_MESSAGE
+    message = msg.encode(FORMAT)
+    msg_length = len(message)
+    send_length = str(msg_length).encode(FORMAT)
+    send_length += b' ' * (HEADER - len(send_length))
+    client.send(send_length)
+    client.send(message)
+    recv_msg = client.recv(2048).decode(FORMAT)
+    print(f"{recv_msg}")
 
 
 def closeAll():

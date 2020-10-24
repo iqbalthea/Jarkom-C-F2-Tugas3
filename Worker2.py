@@ -41,11 +41,11 @@ while True:
         print(f"[{addr}] {msg}")
         if msg == DISCONNECT_MESSAGE:
             print(f"{addr} DISCONNECT FROM SERVER")
-            response = f"DISCONNECT FROM SERVER {ADDR}"
+            response = f"WORKER 2 DISCONNECT FROM SERVER {ADDR}"
             conn.send(response.encode(FORMAT))
             connected = False
             continue
-        else if msg.upper() == "CONNECT" :
+        elif msg.upper() == "CONNECT" :
             var = f"WORKER 2 ALREADY CONNECTED"
         else :
             try :
