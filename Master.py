@@ -19,9 +19,22 @@ def connect(client, addr):
     client.connect(addr)
     print(f"CONNECTED TO SERVER {addr}")
 
+def reconnect(addr):
+    new_client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    new_client.connect(addr)
+    print(f"RECONNECTED TO SERVER {addr}")
+
 
 def disconnect(client):
-    send(client, DISCONNECT_MESSAGE)
+    msg = DISCONNECT_MESSAGE
+    message = msg.encode(FORMAT)
+    msg_length = len(message)
+    send_length = str(msg_length).encode(FORMAT)
+    send_length += b' ' * (HEADER - len(send_length))
+    client.send(send_length)
+    client.send(message)
+    recv_msg = client.recv(2048).decode(FORMAT)
+    print(f"{recv_msg}")
 
 
 def closeAll():
@@ -31,13 +44,21 @@ def closeAll():
 
 
 def send(client, msg):
+    print(f"JOB IS RUNNING")
     message = msg.encode(FORMAT)
     msg_length = len(message)
     send_length = str(msg_length).encode(FORMAT)
     send_length += b' ' * (HEADER - len(send_length))
     client.send(send_length)
     client.send(message)
-    print(client.recv(2048).decode(FORMAT))
+    recv_msg = client.recv(2048).decode(FORMAT)
+    if recv_msg == "ERROR" :
+        print(f"JOB IS FAILED")
+    else :
+        print(f"JOB IS FINISHED")
+        print(f"OUTPUT : {recv_msg}")
+    
+    
 
 
 # connected = True

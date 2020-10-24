@@ -38,15 +38,20 @@ while True:
     if msg_length:
         msg_length = int(msg_length)
         msg = conn.recv(msg_length).decode(FORMAT)
+        print(f"[{addr}] {msg}")
         if msg == DISCONNECT_MESSAGE:
             print(f"{addr} DISCONNECT FROM SERVER")
-            response = f"DISCONNECT FROM SERVER {ADDR}"
+            response = f"WORKER 2 DISCONNECT FROM SERVER {ADDR}"
             conn.send(response.encode(FORMAT))
             connected = False
             continue
-
-        print(f"[{addr}] {msg}")
-        var = find_factor(msg)
+        elif msg.upper() == "CONNECT" :
+            var = f"WORKER 2 ALREADY CONNECTED"
+        else :
+            try :
+                var = find_factor(msg)
+            except :
+                var = f"ERROR"
         conn.send(var.encode(FORMAT))
 
 conn.close()

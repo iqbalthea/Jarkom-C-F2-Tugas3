@@ -35,7 +35,7 @@ while True:
         msg = conn.recv(msg_length).decode(FORMAT)
         if msg.upper() == DISCONNECT_MESSAGE:
             print(f"{addr} DISCONNECT FROM SERVER")
-            response = f"DISCONNECT FROM SERVER {ADDR}"
+            response = f"WORKER 3 DISCONNECT FROM SERVER {ADDR}"
             conn.send(response.encode(FORMAT))
             connected = False
             continue
