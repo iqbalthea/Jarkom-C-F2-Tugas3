@@ -1,5 +1,6 @@
 import socket
 import threading
+import test
 
 HEADER = 2048
 PORT = 5051
@@ -15,6 +16,17 @@ print(f"SERVER IS LISTENING ON {server.getsockname()}")
 
 conn, addr = server.accept()
 print(f"{addr} CONNECTED TO SERVER")
+
+def count_word(x):
+    lst = list(map(str, x.split(",")))
+    # lst = list(str, x.split())
+    # print(lst)
+    file_name = lst[0]
+    word = lst[1]
+    file  = open(f'{file_name}.txt', 'r').read()
+    count = file.count(word)
+
+    return(count)
 
 connected = True
 while True:
@@ -34,8 +46,16 @@ while True:
             connected = False
             continue
 
-        print(f"[{addr}] {msg}")
-        var = f"Hello {msg}"
+        elif msg.upper() == "CONNECT":
+            var = f"WORKER 1 ALREADY CONNECTED"
+        else:
+            try:
+                # file = input("Enter the name of file: ")
+                # word = input("Enter the word: ")
+
+                var = f"Number of words in file: {count_word(msg)}"
+            except:
+                var = f"ERROR"
         conn.send(var.encode(FORMAT))
 
 conn.close()
