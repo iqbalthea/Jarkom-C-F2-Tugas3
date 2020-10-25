@@ -1,5 +1,4 @@
 import socket
-import threading
 
 HEADER = 2048
 PORT = 5052

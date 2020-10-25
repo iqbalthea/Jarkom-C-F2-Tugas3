@@ -1,6 +1,4 @@
 import socket
-import threading
-import test
 import time
 
 HEADER = 2048
