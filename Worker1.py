@@ -52,6 +52,6 @@ while True:
             var = f"Number of words in file: {count_word(msg)}"
         except:
             var = f"ERROR"
-    conn.send(var.encode(FORMAT))
+        conn.send(var.encode(FORMAT))
 
 conn.close()

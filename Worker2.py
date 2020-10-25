@@ -49,6 +49,6 @@ while True:
             var = find_factor(msg)
         except:
             var = f"ERROR"
-    conn.send(var.encode(FORMAT))
+        conn.send(var.encode(FORMAT))
 
 conn.close()

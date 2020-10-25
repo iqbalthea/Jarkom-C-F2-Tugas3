@@ -30,8 +30,8 @@ while True:
         print(f"{addr} CONNECTED TO SERVER")
         connected = True
         continue
-    msg = conn.recv(FORMAT).decode(FORMAT)
-    print(f"[{addr}] {msg}")
+    msg = conn.recv(HEADER).decode(FORMAT)
+    print(f"[{addr}] {msg.strip()}")
     if msg == DISCONNECT_MESSAGE:
         print(f"{addr} DISCONNECT FROM SERVER")
         response = f"DISCONNECT FROM SERVER WORKER 3 {ADDR}"
@@ -44,6 +44,6 @@ while True:
             var = f"SORTED LIST: {sort_list(msg)}"
         except:
             var = f"ERROR"
-    conn.send(var.encode(FORMAT))
+        conn.send(var.encode(FORMAT))
 
 conn.close()

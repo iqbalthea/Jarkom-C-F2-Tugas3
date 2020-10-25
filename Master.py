@@ -4,15 +4,11 @@ HEADER = 2048
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "EXIT"
 SERVER = socket.gethostbyname(socket.gethostname())
+SERVER = "3.84.7.20"
 
-# ADDR_1 = ("54.159.86.93", 5051)
-# ADDR_1 = (SERVER, 5051)
-# ADDR_2 = (SERVER, 5052)
-# ADDR_3 = (SERVER, 5053)
-
-ADDR_1 = ("3.84.7.20", 5051)
-ADDR_2 = ("3.84.7.20", 5052)
-ADDR_3 = ("3.84.7.20", 5053)
+ADDR_1 = (SERVER, 5051)
+ADDR_2 = (SERVER, 5052)
+ADDR_3 = (SERVER, 5053)
 
 client_1 = None
 client_2 = None
@@ -29,12 +25,8 @@ def connect(client, addr):
 def disconnect(client):
     msg = DISCONNECT_MESSAGE
     message = msg.encode(FORMAT)
-    msg_length = len(message)
-    send_length = str(msg_length).encode(FORMAT)
-    send_length += b' ' * (HEADER - len(send_length))
-    client.send(send_length)
     client.send(message)
-    recv_msg = client.recv(2048).decode(FORMAT)
+    recv_msg = client.recv(HEADER).decode(FORMAT)
     print(f"{recv_msg}")
     client.close()
 
