@@ -1,6 +1,7 @@
 import socket
 import threading
 import test
+import time
 
 HEADER = 2048
 PORT = 5051
@@ -24,6 +25,7 @@ def count_word(x):
     file_name = lst[0]
     word = lst[1]
     file  = open(f'{file_name}.txt', 'r').read()
+    time.sleep(30)
     count = file.count(word)
 
     return(count)
