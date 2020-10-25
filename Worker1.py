@@ -18,17 +18,19 @@ print(f"SERVER IS LISTENING ON {server.getsockname()}")
 conn, addr = server.accept()
 print(f"{addr} CONNECTED TO SERVER")
 
+
 def count_word(x):
     lst = list(map(str, x.split(",")))
     # lst = list(str, x.split())
     # print(lst)
     file_name = lst[0]
     word = lst[1]
-    file  = open(f'{file_name}.txt', 'r').read()
-    time.sleep(30)
+    file = open(f'{file_name}', 'r').read()
+    # time.sleep(30)
     count = file.count(word)
 
     return(count)
+
 
 connected = True
 while True:
