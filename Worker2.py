@@ -34,23 +34,21 @@ while True:
         print(f"{addr} CONNECTED TO SERVER")
         connected = True
         continue
-    msg_length = conn.recv(HEADER).decode(FORMAT)
-    if msg_length:
-        msg_length = int(msg_length)
-        msg = conn.recv(msg_length).decode(FORMAT)
-        print(f"[{addr}] {msg}")
-        if msg == DISCONNECT_MESSAGE:
-            print(f"{addr} DISCONNECT FROM SERVER")
-            response = f"DISCONNECT FROM SERVER WORKER 2 {ADDR}"
-            conn.send(response.encode(FORMAT))
-            connected = False
-            continue
 
-        else:
-            try:
-                var = find_factor(msg)
-            except:
-                var = f"ERROR"
-        conn.send(var.encode(FORMAT))
+    msg = conn.recv(HEADER).decode(FORMAT)
+    print(f"[{addr}] {msg}")
+    if msg == DISCONNECT_MESSAGE:
+        print(f"{addr} DISCONNECT FROM SERVER")
+        response = f"DISCONNECT FROM SERVER WORKER 2 {ADDR}"
+        conn.send(response.encode(FORMAT))
+        connected = False
+        continue
+
+    else:
+        try:
+            var = find_factor(msg)
+        except:
+            var = f"ERROR"
+    conn.send(var.encode(FORMAT))
 
 conn.close()

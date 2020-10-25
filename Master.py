@@ -6,9 +6,13 @@ DISCONNECT_MESSAGE = "EXIT"
 SERVER = socket.gethostbyname(socket.gethostname())
 
 # ADDR_1 = ("54.159.86.93", 5051)
-ADDR_1 = (SERVER, 5051)
-ADDR_2 = (SERVER, 5052)
-ADDR_3 = (SERVER, 5053)
+# ADDR_1 = (SERVER, 5051)
+# ADDR_2 = (SERVER, 5052)
+# ADDR_3 = (SERVER, 5053)
+
+ADDR_1 = ("3.84.7.20", 5051)
+ADDR_2 = ("3.84.7.20", 5052)
+ADDR_3 = ("3.84.7.20", 5053)
 
 client_1 = None
 client_2 = None
@@ -35,32 +39,29 @@ def disconnect(client):
 
 
 def closeAll(client_1, client_2, client_3):
-    try :
+    try:
         client_1.close()
         print(f"SUCESS DISCONNECT WORKER 1")
-    except :
+    except:
         print(f"FAILED DISCONNECT WORKER 1")
         print(f"Worker 1 is not connected to the server")
-    try :
+    try:
         client_2.close()
         print(f"SUCESS DISCONNECT WORKER 2")
-    except :
+    except:
         print(f"FAILED DISCONNECT WORKER 2")
         print(f"Worker 2 is not connected to the server")
-    try :
+    try:
         client_3.close()
         print(f"SUCESS DISCONNECT WORKER 3")
-    except :
+    except:
         print(f"FAILED DISCONNECT WORKER 3")
         print(f"Worker 3 is not connected to the server")
+
 
 def send(client, msg):
     print(f"JOB IS RUNNING")
     message = msg.encode(FORMAT)
-    msg_length = len(message)
-    send_length = str(msg_length).encode(FORMAT)
-    send_length += b' ' * (HEADER - len(send_length))
-    client.send(send_length)
     client.send(message)
     recv_msg = client.recv(2048).decode(FORMAT)
     if recv_msg == "ERROR":
@@ -68,8 +69,6 @@ def send(client, msg):
     else:
         print(f"JOB IS FINISHED")
         print(f"[OUTPUT] = {recv_msg}")
-    
-    
 
 
 # connected = True

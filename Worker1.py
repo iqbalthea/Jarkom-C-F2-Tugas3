@@ -21,12 +21,10 @@ print(f"{addr} CONNECTED TO SERVER")
 
 def count_word(x):
     lst = list(map(str, x.split(",")))
-    # lst = list(str, x.split())
-    # print(lst)
     file_name = lst[0]
     word = lst[1]
     file = open(f'{file_name}', 'r').read()
-    # time.sleep(30)
+    time.sleep(30)
     count = file.count(word)
 
     return(count)
@@ -39,25 +37,21 @@ while True:
         print(f"{addr} CONNECTED TO SERVER")
         connected = True
         continue
-    msg_length = conn.recv(HEADER).decode(FORMAT)
-    if msg_length:
-        msg_length = int(msg_length)
-        msg = conn.recv(msg_length).decode(FORMAT)
-        if msg.upper() == DISCONNECT_MESSAGE:
-            print(f"{addr} DISCONNECT FROM SERVER")
-            response = f"DISCONNECT FROM SERVER WORKER 1 {ADDR}"
-            conn.send(response.encode(FORMAT))
-            connected = False
-            continue
 
-        else:
-            try:
-                # file = input("Enter the name of file: ")
-                # word = input("Enter the word: ")
+    msg = conn.recv(HEADER).decode(FORMAT)
+    print(f"[{addr}] {msg}")
+    if msg.upper() == DISCONNECT_MESSAGE:
+        print(f"{addr} DISCONNECT FROM SERVER")
+        response = f"DISCONNECT FROM SERVER WORKER 1 {ADDR}"
+        conn.send(response.encode(FORMAT))
+        connected = False
+        continue
 
-                var = f"Number of words in file: {count_word(msg)}"
-            except:
-                var = f"ERROR"
-        conn.send(var.encode(FORMAT))
+    else:
+        try:
+            var = f"Number of words in file: {count_word(msg)}"
+        except:
+            var = f"ERROR"
+    conn.send(var.encode(FORMAT))
 
 conn.close()
