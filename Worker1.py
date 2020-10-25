@@ -48,8 +48,6 @@ while True:
             connected = False
             continue
 
-        elif msg.upper() == "CONNECT":
-            var = f"WORKER 1 ALREADY CONNECTED"
         else:
             try:
                 # file = input("Enter the name of file: ")

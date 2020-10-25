@@ -18,10 +18,12 @@ while connected:
 
     if command == "EXIT" and argument == "ALL":
         connected = False
-        closeAll()
+        closeAll(client_1, client_2, client_3)
     elif command == "W1":
         if argument.upper() != "CONNECT" and not status_W1:
             print(f"Not connected to W1")
+        elif argument.upper() == "CONNECT" and status_W1:
+            print(f"Worker 1 already connected")
         elif argument.upper() == "CONNECT" and not status_W1:
             try:
                 client_1 = connect(client_1, ADDR_1)
@@ -36,6 +38,8 @@ while connected:
     elif command == "W2":
         if argument.upper() != "CONNECT" and not status_W2:
             print(f"Not connected to W2")
+        elif argument.upper() == "CONNECT" and status_W2:
+            print(f"Worker 2 already connected")
         elif argument.upper() == "CONNECT" and not status_W2:
             try:
                 client_2 = connect(client_2, ADDR_2)
@@ -50,6 +54,8 @@ while connected:
     elif command == "W3":
         if argument.upper() != "CONNECT" and not status_W3:
             print(f"Not connected to W3")
+        elif argument.upper() == "CONNECT" and status_W3:
+            print(f"Worker 3 already connected")
         elif argument.upper() == "CONNECT" and not status_W3:
             try:
                 client_3 = connect(client_3, ADDR_3)
