@@ -45,8 +45,7 @@ while True:
             conn.send(response.encode(FORMAT))
             connected = False
             continue
-        elif msg.upper() == "CONNECT":
-            var = f"WORKER 2 ALREADY CONNECTED"
+
         else:
             try:
                 var = find_factor(msg)
