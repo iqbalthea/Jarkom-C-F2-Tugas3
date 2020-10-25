@@ -36,23 +36,24 @@ def disconnect(client):
     client.send(message)
     recv_msg = client.recv(2048).decode(FORMAT)
     print(f"{recv_msg}")
+    client.close()
 
 
 def closeAll(client_1, client_2, client_3):
     try:
-        client_1.close()
+        disconnect(client_1)
         print(f"SUCESS DISCONNECT WORKER 1")
     except:
         print(f"FAILED DISCONNECT WORKER 1")
         print(f"Worker 1 is not connected to the server")
     try:
-        client_2.close()
+        disconnect(client_2)
         print(f"SUCESS DISCONNECT WORKER 2")
     except:
         print(f"FAILED DISCONNECT WORKER 2")
         print(f"Worker 2 is not connected to the server")
     try:
-        client_3.close()
+        disconnect(client_3)
         print(f"SUCESS DISCONNECT WORKER 3")
     except:
         print(f"FAILED DISCONNECT WORKER 3")
