@@ -4,6 +4,8 @@ HEADER = 2048
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "EXIT"
 SERVER = socket.gethostbyname(socket.gethostname())
+# SERVER = "3.84.7.20"
+SERVER = "54.237.193.137"
 
 ADDR_1 = (SERVER, 5051)
 ADDR_2 = (SERVER, 5052)
@@ -61,3 +63,5 @@ def send(client, msg):
     else:
         print(f"JOB IS FINISHED")
         print(f"[OUTPUT] = {recv_msg}")
+
+
